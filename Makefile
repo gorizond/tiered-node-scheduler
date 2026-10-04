@@ -3,7 +3,7 @@ BIN_NAME := tiered-node-scheduler
 IMAGE_REPO ?= ghcr.io/gorizond/tiered-node-scheduler
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo "v0.1.0")
 GIT_COMMIT ?= $(shell git rev-parse --short HEAD 2>/dev/null || echo "dev")
-LDFLAGS := -s -w -X k8s.io/component-base/version.gitVersion=$(VERSION) -X k8s.io/component-base/version.gitCommit=$(GIT_COMMIT)
+LDFLAGS := -s -w -X k8s.io/component-base/version.gitCommit=$(GIT_COMMIT)
 
 GO_BUILD_ENV := CGO_ENABLED=0
 

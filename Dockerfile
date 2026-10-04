@@ -19,7 +19,7 @@ ARG GIT_COMMIT=unknown
 
 RUN CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH} \
     go build -trimpath \
-    -ldflags="-s -w -X k8s.io/component-base/version.gitVersion=${VERSION} -X k8s.io/component-base/version.gitCommit=${GIT_COMMIT}" \
+    -ldflags="-s -w -X k8s.io/component-base/version.gitCommit=${GIT_COMMIT}" \
     -o /bin/tiered-node-scheduler ./cmd/scheduler
 
 # Stage 2: Minimal non-root runtime image
