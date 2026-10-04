@@ -9,3 +9,7 @@ rules:
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
     verbs: ["get", "list", "watch", "create", "update", "delete"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    resourceNames: ["extension-apiserver-authentication"]
+    verbs: ["get", "list", "watch"]
