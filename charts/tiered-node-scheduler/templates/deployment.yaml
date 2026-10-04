@@ -34,23 +34,25 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           livenessProbe:
+            failureThreshold: 3
             httpGet:
-              path: /livez
+              path: /healthz
               port: 10259
               scheme: HTTPS
-              host: localhost
-            initialDelaySeconds: 30
+            initialDelaySeconds: 15
             periodSeconds: 10
-            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
+            failureThreshold: 3
             httpGet:
-              path: /readyz
+              path: /healthz
               port: 10259
               scheme: HTTPS
-              host: localhost
-            initialDelaySeconds: 10
+            initialDelaySeconds: 15
             periodSeconds: 10
-            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 1
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
