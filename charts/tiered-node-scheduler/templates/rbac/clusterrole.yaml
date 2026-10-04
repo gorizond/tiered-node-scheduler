@@ -58,3 +58,22 @@ rules:
     resources: ["leases"]
     resourceNames: ["{{ .Values.leaderElection.resourceName }}"]
     verbs: ["get", "update"]
+  # k8s v1.33 scheduler informer set (parity with upstream system:kube-scheduler):
+  # VolumeAttachments informer is started unconditionally and WaitForCacheSync
+  # blocks leader election until it syncs; without this rule the scheduler
+  # never acquires the lease and pods with schedulerName=tiered-node-scheduler
+  # stay Pending forever.
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["volumeattachments"]
+    verbs: ["get", "list", "watch"]
+  # Delegated authn/authz for the secure serving endpoint (parity with upstream).
+  - apiGroups: ["authentication.k8s.io"]
+    resources: ["tokenreviews"]
+    verbs: ["create"]
+  - apiGroups: ["authorization.k8s.io"]
+    resources: ["subjectaccessreviews"]
+    verbs: ["create"]
+  # CoordinatedLeaderElection (lease-based, future-proof; harmless when disabled).
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leasecandidates"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
