@@ -2,6 +2,25 @@ apiVersion: v1
 entries:
   tiered-node-scheduler:
   - apiVersion: v2
+    appVersion: 0.1.1
+    created: "2026-10-04T16:17:53.346510082Z"
+    description: Production-grade tiered node fallback scheduler based on Kubernetes
+      Scheduler Framework
+    digest: aa442430b997c486e63e48fbce754d0b84ab0c7c358d0fe9e6bdb2e6c59c49e3
+    keywords:
+    - kubernetes
+    - scheduler
+    - platform-engineering
+    - priority-fallback
+    maintainers:
+    - email: platform@gorizond.dev
+      name: Platform Engineering Team
+    name: tiered-node-scheduler
+    type: application
+    urls:
+    - https://github.com/gorizond/tiered-node-scheduler/releases/download/tiered-node-scheduler-0.1.1/tiered-node-scheduler-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: 0.1.0
     created: "2026-10-04T17:27:08.037783+02:00"
     description: Production-grade tiered node fallback scheduler based on Kubernetes
@@ -20,4 +39,4 @@ entries:
     urls:
     - https://github.com/gorizond/tiered-node-scheduler/releases/download/tiered-node-scheduler-0.1.0/tiered-node-scheduler-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-04T17:27:08.037312+02:00"
+generated: "2026-10-04T16:17:53.347722602Z"
