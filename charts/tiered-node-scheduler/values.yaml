@@ -1,0 +1,83 @@
+replicaCount: 2
+
+image:
+  repository: ghcr.io/gorizond/tiered-node-scheduler
+  pullPolicy: IfNotPresent
+  tag: "v0.1.0"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+schedulerName: tiered-node-scheduler
+
+leaderElection:
+  leaderElect: true
+  resourceNamespace: "kube-system"
+  resourceName: "tiered-node-scheduler"
+
+pluginConfig:
+  fallbackTimeoutSeconds: 20
+  primaryNodeLabelKey: "pool"
+  primaryNodeLabelValue: "primary"
+
+logVerbosity: 2
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: "tiered-node-scheduler"
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+podAnnotations: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 10001
+  capabilities:
+    drop:
+      - ALL
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations:
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
+    effect: "NoSchedule"
+  - key: "node-role.kubernetes.io/master"
+    operator: "Exists"
+    effect: "NoSchedule"
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - tiered-node-scheduler
+          topologyKey: kubernetes.io/hostname
