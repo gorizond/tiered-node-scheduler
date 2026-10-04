@@ -1,5 +1,5 @@
 # Stage 1: Build binary
-FROM --platform=$BUILDPLATFORM golang:1.22-bullseye AS builder
+FROM --platform=$BUILDPLATFORM golang:1.24-bullseye AS builder
 
 WORKDIR /workspace
 
