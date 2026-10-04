@@ -38,7 +38,8 @@ spec:
               path: /livez
               port: 10259
               scheme: HTTPS
-            initialDelaySeconds: 15
+              host: localhost
+            initialDelaySeconds: 30
             periodSeconds: 10
             failureThreshold: 3
           readinessProbe:
@@ -46,6 +47,7 @@ spec:
               path: /readyz
               port: 10259
               scheme: HTTPS
+              host: localhost
             initialDelaySeconds: 10
             periodSeconds: 10
             failureThreshold: 3

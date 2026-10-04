@@ -2,8 +2,8 @@ apiVersion: v2
 name: tiered-node-scheduler
 description: Production-grade tiered node fallback scheduler based on Kubernetes Scheduler Framework
 type: application
-version: 0.1.1
-appVersion: 0.1.1
+version: 0.1.2
+appVersion: 0.1.2
 keywords:
   - kubernetes
   - scheduler
